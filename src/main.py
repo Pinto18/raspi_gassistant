@@ -24,9 +24,10 @@ The Google Assistant Library can be installed with:
 It is available for Raspberry Pi 2/3 only; Pi Zero is not supported.
 """
 
-import logging
-import sys
+#import logging
+#import sys
 import subprocess
+import RPi.GPIO as GPIO
 import aiy.assistant.auth_helpers
 import aiy.voicehat
 from google.assistant.library import Assistant
@@ -36,27 +37,50 @@ from google.assistant.library.event import EventType
 #    level=logging.INFO,
 #    format="[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
 #)
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
+#Indicator Pins
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(5, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+GPIO.output(5, GPIO.LOW)
+GPIO.output(6, GPIO.LOW)
+led=GPIO.PWM(25,1)
+led.start(0)
 
 def process_event(event):
-    status_ui = aiy.voicehat.get_status_ui()
-    if event.type == EventType.ON_START_FINISHED:
-        status_ui.status('ready')
+    #status_ui = aiy.voicehat.get_status_ui()
+#    if event.type == EventType.ON_START_FINISHED:
+        #status_ui.status('ready')
 #        if sys.stdout.isatty():
 #            print('Say "OK, Google" then speak, or press Ctrl+C to quit...')
 
-    elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
-        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        status_ui.status('listening')
+    if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
+        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"],
+                         stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+        #status_ui.status('listening')
+        GPIO.output(5, GPIO.HIGH)
+        led.ChangeDutyCycle(100)
 
-    elif event.type == EventType.ON_END_OF_UTTERANCE:
-        status_ui.status('thinking')
+    #if event.type == EventType.ON_END_OF_UTTERANCE:
+        #status_ui.status('thinking')
 
-    elif event.type == EventType.ON_CONVERSATION_TURN_FINISHED:
-        status_ui.status('ready')
+    if event.type == (event.type == EventType.ON_CONVERSATION_TURN_FINISHED and
+            event.args and not event.args['with_follow_on_turn']):
+        # status_ui.status('ready')
+        GPIO.output(5,GPIO.LOW)
+        led.ChangeDutyCycle(0)
+        print()
 
-    elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
-        sys.exit(1)
+    if event.type == (EventType.ON_ASSISTANT_ERROR and
+                      event.args and
+                      event.args['is_fatal']):
+        #sys.exit(1)
+        GPIO.output(5, GPIO.LOW)
+        GPIO.output(6, GPIO.HIGH)
+        led.ChangeDutyCycle(50)
 
 
 def main():
