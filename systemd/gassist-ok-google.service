@@ -6,7 +6,7 @@ Afer=network.target
 [Service]
 Environment=VIRTUAL_ENV=/home/pi/env
 Environment=PATH=/home/pip/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ExecStart=/home/pi/env/bin/pytohn -u /home/pi/nicks-gassistant/src/assistant_library_demo.py
+ExecStart=/home/pi/env/bin/pytohn -u /home/pi/nicks-gassistant/src/main.py
 WorkingDirectory=/home/pi/
 StandardOutput=inherit
 StandardError=inherit
