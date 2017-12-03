@@ -47,7 +47,9 @@ def process_event(event):
 
     elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         status_ui.status('listening')
-        aiy.voicehat.get_status_ui().set_trigger_sound_wave('/home/pi/nicks-gassistant/sample-audio-files/Fb.wav')
+        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"],
+                         stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     elif event.type == EventType.ON_END_OF_UTTERANCE:
         status_ui.status('thinking')
