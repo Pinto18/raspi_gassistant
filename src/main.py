@@ -27,10 +27,12 @@ It is available for Raspberry Pi 2/3 only; Pi Zero is not supported.
 import logging
 import sys
 import subprocess
+import time
 import aiy.assistant.auth_helpers
 import aiy.voicehat
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
+from .actions import shutdown
 
 logging.basicConfig(
     level=logging.INFO,
@@ -69,6 +71,11 @@ def main():
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         for event in assistant.start():
             process_event(event)
+            usercmd=event.args
+            if 'shutdown'.lower() in str(usercmd).lower():
+                aiy.audio.say('Shutting down now')
+                time.sleep(10)
+                shutdown()
 
 
 if __name__ == '__main__':
