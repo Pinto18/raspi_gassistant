@@ -1,4 +1,4 @@
-#!/home/pi/AIY-voice-kit-python/env/bin/python
+#!/home/pi/nicks-gassistant/env/bin/python
 
 import sys
 import getopt

@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/pi/AIY-voice-kit-python/env"
+VIRTUAL_ENV="/home/pi/nicks-gassistant/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
