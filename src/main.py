@@ -62,7 +62,7 @@ def process_event(event):
 def main():
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with Assistant(credentials) as assistant:
-        subprocess.Popen(["aplay", "/home/pi/GassistPi/sample-audio-files/Startup.wav"],
+        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Startup.wav"],
                          stdin=subprocess.PIPE,
                          stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         for event in assistant.start():
