@@ -26,7 +26,7 @@ It is available for Raspberry Pi 2/3 only; Pi Zero is not supported.
 
 import logging
 import sys
-
+import subprocess
 import aiy.assistant.auth_helpers
 import aiy.voicehat
 from google.assistant.library import Assistant
@@ -47,6 +47,7 @@ def process_event(event):
 
     elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         status_ui.status('listening')
+        aiy.voicehat.get_status_ui().set_trigger_sound_wave('/home/pi/nicks-gassistant/sample-audio-files/Fb.wav')
 
     elif event.type == EventType.ON_END_OF_UTTERANCE:
         status_ui.status('thinking')
@@ -61,6 +62,9 @@ def process_event(event):
 def main():
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with Assistant(credentials) as assistant:
+        subprocess.Popen(["aplay", "/home/pi/GassistPi/sample-audio-files/Startup.wav"],
+                         stdin=subprocess.PIPE,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         for event in assistant.start():
             process_event(event)
 
