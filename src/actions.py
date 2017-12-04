@@ -2,7 +2,16 @@
 
 import subprocess
 import time
+import os
 import aiy.audio
+
+def say(words):
+    tempfile = "temp.wav"
+    devnull = open("/dev/null","w")
+    lang = "en-GB" #Other languages: en-US: US English, en-GB: UK English, de-DE: German, es-ES: Spanish, fr-FR: French, it-IT: Italian
+    subprocess.call(["pico2wave", "-w", tempfile, "-l", lang,  words],stderr=devnull)
+    subprocess.call(["aplay", tempfile],stderr=devnull)
+    os.remove(tempfile)
 
 def shutdown():
     subprocess.call(
@@ -14,7 +23,8 @@ def shutdown():
 
 def action(phrase):
     if 'shut down' in phrase:
-        aiy.audio.say('Shutting down now.')
+        #aiy.audio.say('Shutting down now.')
+        say('Shutting down now.')
         time.sleep(10)
         subprocess.call(
             ["sudo",
@@ -23,7 +33,8 @@ def action(phrase):
              "now"]
         )
     if 'boot' in phrase:
-        aiy.audio.say('Restarting now.')
+        #aiy.audio.say('Restarting now.')
+        say('Restarting now.')
         time.sleep(10)
         subprocess.call(
             ["sudo",
