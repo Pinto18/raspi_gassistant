@@ -12,7 +12,7 @@ def shutdown():
          "now"]
     )
 
-def actions(phrase):
+def action(phrase):
     if 'shut down' in phrase:
         aiy.audio.say('Shutting down now')
         time.sleep(10)
