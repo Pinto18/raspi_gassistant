@@ -72,7 +72,7 @@ def main():
         for event in assistant.start():
             process_event(event)
             usercmd=event.args
-            if 'shutdown'.lower() in str(usercmd).lower():
+            if 'shut down'.lower() in str(usercmd).lower():
                 aiy.audio.say('Shutting down now')
                 time.sleep(10)
                 shutdown()
