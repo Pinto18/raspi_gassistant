@@ -33,6 +33,7 @@ import aiy.voicehat
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from actions import shutdown
+from actions import action
 
 logging.basicConfig(
     level=logging.INFO,
@@ -72,10 +73,9 @@ def main():
         for event in assistant.start():
             process_event(event)
             usercmd=event.args
-            if 'shut down'.lower() in str(usercmd).lower():
-                aiy.audio.say('Shutting down now')
-                time.sleep(10)
-                shutdown()
+            if 'trigger'.lower() in str(usercmd).lower():
+                assistant.stop_conversation()
+                action(str(usercmd).lower())
 
 
 if __name__ == '__main__':
