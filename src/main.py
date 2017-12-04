@@ -32,7 +32,7 @@ import aiy.assistant.auth_helpers
 import aiy.voicehat
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
-from .actions import shutdown
+from actions import shutdown
 
 logging.basicConfig(
     level=logging.INFO,
