@@ -8,7 +8,7 @@ import aiy.audio
 def say(words):
     tempfile = "temp.wav"
     devnull = open("/dev/null","w")
-    lang = "en-GB" #Other languages: en-US: US English, en-GB: UK English, de-DE: German, es-ES: Spanish, fr-FR: French, it-IT: Italian
+    lang = "en-US" #Other languages: en-US: US English, en-GB: UK English, de-DE: German, es-ES: Spanish, fr-FR: French, it-IT: Italian
     subprocess.call(["pico2wave", "-w", tempfile, "-l", lang,  words],stderr=devnull)
     subprocess.call(["aplay", tempfile],stderr=devnull)
     os.remove(tempfile)
