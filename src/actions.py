@@ -33,7 +33,7 @@ def action(phrase):
         #      "-h",
         #      "now"]
         # )
-        os.command("sudo shutdown -h now")
+        os.system("sudo shutdown -h now")
 
     if 'boot' in phrase:
         #aiy.audio.say('Restarting now.')
@@ -43,4 +43,4 @@ def action(phrase):
         #     ["sudo",
         #      "reboot"]
         # )
-        os.command("sudo reboot")
+        os.system("sudo reboot")

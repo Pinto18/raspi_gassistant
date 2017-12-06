@@ -54,7 +54,7 @@ def process_event(event):
         # subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"],
         #                  stdin=subprocess.PIPE,
         #                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        os.command("aplay /home/pi/nicks-gassistant/sample-audio-files/Fb.wav")
+        os.system("aplay /home/pi/nicks-gassistant/sample-audio-files/Fb.wav")
 
     elif event.type == EventType.ON_END_OF_UTTERANCE:
         status_ui.status('thinking')
@@ -69,9 +69,10 @@ def process_event(event):
 def main():
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with Assistant(credentials) as assistant:
-        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Startup.wav"],
-                         stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Startup.wav"],
+        #                  stdin=subprocess.PIPE,
+        #                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        os.system("aplay /home/pi/nicks-gassistant/sample-audio-files/Startup.wav")
         for event in assistant.start():
             process_event(event)
             usercmd=event.args
