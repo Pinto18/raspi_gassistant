@@ -27,20 +27,17 @@ def action(phrase):
         #aiy.audio.say('Shutting down now.')
         say('Shutting down now.')
         time.sleep(10)
-        # subprocess.call(
-        #     ["sudo",
-        #      "shutdown",
-        #      "-h",
-        #      "now"]
-        # )
-        os.system("sudo shutdown -h now")
-
+        subprocess.call(
+            ["sudo",
+             "shutdown",
+             "-h",
+             "now"]
+        )
     if 'boot' in phrase:
         #aiy.audio.say('Restarting now.')
         say('Restarting now.')
         time.sleep(10)
-        # subprocess.call(
-        #     ["sudo",
-        #      "reboot"]
-        # )
-        os.system("sudo reboot")
+        subprocess.call(
+            ["sudo",
+             "reboot"]
+        )
