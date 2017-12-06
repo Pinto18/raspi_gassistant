@@ -41,3 +41,15 @@ def action(phrase):
             ["sudo",
              "reboot"]
         )
+
+    if 'lamp' in phrase:
+        if 'on' in phrase:
+            say('Turning lamp on.')
+            subprocess.call(["curl",
+                             "http://192.168.104.239/LED=ON"]
+                            )
+        elif 'off' in phrase:
+            say('Turning lamp off.')
+            subprocess.call(["curl",
+                             "http://192.168.104.239/LED=OFF"]
+                            )
