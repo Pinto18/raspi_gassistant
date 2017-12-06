@@ -28,6 +28,7 @@ import logging
 import sys
 import subprocess
 import time
+import os
 import aiy.assistant.auth_helpers
 import aiy.voicehat
 from google.assistant.library import Assistant
@@ -50,9 +51,10 @@ def process_event(event):
 
     elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         status_ui.status('listening')
-        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"],
-                         stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"],
+        #                  stdin=subprocess.PIPE,
+        #                  stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        os.command("aplay /home/pi/nicks-gassistant/sample-audio-files/Fb.wav")
 
     elif event.type == EventType.ON_END_OF_UTTERANCE:
         status_ui.status('thinking')
