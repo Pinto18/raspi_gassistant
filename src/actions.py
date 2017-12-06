@@ -13,14 +13,14 @@ def say(words):
     subprocess.call(["aplay", tempfile],stderr=devnull)
     os.remove(tempfile)
 
-# def shutdown():
-#     # subprocess.call(
-#     #     ["sudo",
-#     #      "shutdown",
-#     #      "-h",
-#     #      "now"]
-#     # )
-#     os.command("sudo shutdown -h now")
+def shutdown():
+    # subprocess.call(
+    #     ["sudo",
+    #      "shutdown",
+    #      "-h",
+    #      "now"]
+    # )
+    os.command("sudo shutdown -h now")
 
 def action(phrase):
     if 'shut down' in phrase:
