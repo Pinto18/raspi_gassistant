@@ -1,0 +1,3 @@
+[submodule "src/apis/server_commands_api/os-system-commands-api"]
+	path = src/apis/server_commands_api/os-system-commands-api
+	url = https://github.com/Pinto18/os-system-commands-api
