@@ -28,7 +28,7 @@ def shutdown():
     #      "-h",
     #      "now"]
     # )
-    os.command("sudo shutdown -h now")
+    os.system("sudo shutdown -h now")
 
 def action(phrase):
     if 'shut down' in phrase:
@@ -55,7 +55,7 @@ def action(phrase):
     if 'lamp' in phrase:
         if 'on' in phrase:
             say('Turning lamp on.')
-            os.command(
+            os.system(
                         [
                             "curl",
                             "http://192.168.104.239/LED=ON"
@@ -63,7 +63,7 @@ def action(phrase):
                       )
         elif 'off' in phrase:
             say('Turning lamp off.')
-            os.command(
+            os.system(
                         [
                             "curl",
                             "http://192.168.104.239/LED=OFF"
