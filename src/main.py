@@ -32,7 +32,7 @@ import aiy.assistant.auth_helpers
 import aiy.voicehat
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
-from actions import action
+from actions import action, say
 
 logging.basicConfig(
     level=logging.INFO,
@@ -75,6 +75,11 @@ def main():
             if 'trigger'.lower() in str(usercmd).lower():
                 assistant.stop_conversation()
                 action(str(usercmd).lower())
+            if 'say'.lower() in str(usercmd).lower():
+                assistant.stop_conversation()
+                words = str(usercmd).lower()
+                words.replace('say', '')
+                say(words)
 
 
 if __name__ == '__main__':
