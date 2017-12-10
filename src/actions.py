@@ -5,14 +5,21 @@ import time
 import os
 import requests
 import aiy.audio
+from gtts import gTTS
 
 def say(words):
-    tempfile = "temp.wav"
-    devnull = open("/dev/null","w")
-    lang = "en-GB" #Other languages: en-US: US English, en-GB: UK English, de-DE: German, es-ES: Spanish, fr-FR: French, it-IT: Italian
-    subprocess.call(["pico2wave", "-w", tempfile, "-l", lang,  words],stderr=devnull)
-    subprocess.call(["aplay", tempfile],stderr=devnull)
-    os.remove(tempfile)
+    # tempfile = "temp.wav"
+    # devnull = open("/dev/null","w")
+    # lang = "en-GB" #Other languages: en-US: US English, en-GB: UK English, de-DE: German, es-ES: Spanish, fr-FR: French, it-IT: Italian
+    # subprocess.call(["pico2wave", "-w", tempfile, "-l", lang,  words],stderr=devnull)
+    # subprocess.call(["aplay", tempfile],stderr=devnull)
+    # os.remove(tempfile)
+    tts = gTTS(text=words, lang='en', slow=False)
+    tts.save('temp.mp3')
+    os.system('mpg123 temp.mp3')
+    os.remove('temp.mp3')
+
+
 
 def shutdown():
     # subprocess.call(
