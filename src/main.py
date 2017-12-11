@@ -32,7 +32,7 @@ import aiy.assistant.auth_helpers
 import aiy.voicehat
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
-from actions import action, say
+from actions import action, automate, say
 
 logging.basicConfig(
     level=logging.INFO,
@@ -49,9 +49,14 @@ def process_event(event):
 
     elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         status_ui.status('listening')
-        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"],
-                         stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.Popen(
+                          [
+                              "aplay",
+                              "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"
+                          ],
+                          stdin=subprocess.PIPE,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                        )
 
     elif event.type == EventType.ON_END_OF_UTTERANCE:
         status_ui.status('thinking')
@@ -59,28 +64,32 @@ def process_event(event):
     elif event.type == EventType.ON_CONVERSATION_TURN_FINISHED:
         status_ui.status('ready')
 
-    elif event.type == EventType.ON_ASSISTANT_ERROR and event.args and event.args['is_fatal']:
+    elif event.type == EventType.ON_ASSISTANT_ERROR 
+                       and event.args 
+                       and event.args['is_fatal']:
         sys.exit(1)
 
 
 def main():
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with Assistant(credentials) as assistant:
-        subprocess.Popen(["aplay", "/home/pi/nicks-gassistant/sample-audio-files/Startup.wav"],
-                         stdin=subprocess.PIPE,
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.Popen(
+                            [
+                                "aplay", 
+                                "~/nicks-gassistant/sample-audio-files/Startup.wav"
+                            ],
+                            stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE
+                        )
         for event in assistant.start():
             process_event(event)
             usercmd=event.args
             if 'trigger'.lower() in str(usercmd).lower():
                 assistant.stop_conversation()
                 action(str(usercmd).lower())
-            if 'say'.lower() in str(usercmd).lower():
+            if 'turn'.lower() in str(usercmd).lower():
                 assistant.stop_conversation()
-                words = str(usercmd).lower()
-                words.replace('say', '')
-                say(words)
-
+                automate(str(usercmd).lower())
 
 if __name__ == '__main__':
     main()

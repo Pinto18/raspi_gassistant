@@ -10,9 +10,27 @@ from gtts import gTTS
 def say(words):
     # tempfile = "temp.wav"
     # devnull = open("/dev/null","w")
-    # lang = "en-GB" #Other languages: en-US: US English, en-GB: UK English, de-DE: German, es-ES: Spanish, fr-FR: French, it-IT: Italian
-    # subprocess.call(["pico2wave", "-w", tempfile, "-l", lang,  words],stderr=devnull)
-    # subprocess.call(["aplay", tempfile],stderr=devnull)
+    # lang = "en-GB" #Other languages: en-US: US English, 
+    #           en-GB: UK English, de-DE: German, es-ES: Spanish, 
+    #           fr-FR: French, it-IT: Italian
+    # subprocess.call(
+    #                   [
+    #                       "pico2wave", 
+    #                       "-w", 
+    #                       tempfile, 
+    #                       "-l", 
+    #                       lang,  
+    #                       words
+    #                   ],
+    #                   stderr=devnull
+    #                )
+    # subprocess.call(
+    #                   [
+    #                       "aplay", 
+    #                       tempfile
+    #                   ],
+    #                   stderr=devnull
+    #                )
     # os.remove(tempfile)
     tts = gTTS(text=words, lang='en', slow=False)
     tts.save('temp.mp3')
@@ -52,6 +70,7 @@ def action(phrase):
         command = response.json()
         os.system(command['command'])
 
+def automate(phrase):
     if 'lamp' in phrase:
         if 'on' in phrase:
             say('Turning lamp on.')
