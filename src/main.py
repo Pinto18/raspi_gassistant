@@ -57,6 +57,7 @@ def process_event(event):
                           stdin=subprocess.PIPE,
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE
                         )
+        say('I am listening Nick')
 
     elif event.type == EventType.ON_END_OF_UTTERANCE:
         status_ui.status('thinking')
