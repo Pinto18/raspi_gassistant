@@ -65,8 +65,8 @@ def process_event(event):
         status_ui.status('ready')
 
     elif event.type == (EventType.ON_ASSISTANT_ERROR 
-                         and event.args 
-                         and event.args['is_fatal']):
+                         and (event.args 
+                            and event.args['is_fatal'])):
         sys.exit(1)
 
 
