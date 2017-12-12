@@ -26,7 +26,8 @@ It is available for Raspberry Pi 2/3 only; Pi Zero is not supported.
 
 import logging
 import sys
-import subprocess
+#import subprocess
+import os
 import time
 import aiy.assistant.auth_helpers
 import aiy.voicehat
