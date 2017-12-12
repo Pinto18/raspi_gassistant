@@ -49,14 +49,15 @@ def process_event(event):
 
     elif event.type == EventType.ON_CONVERSATION_TURN_STARTED:
         status_ui.status('listening')
-        subprocess.Popen(
-                          [
-                              "aplay",
-                              "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"
-                          ],
-                          stdin=subprocess.PIPE,
-                          stdout=subprocess.PIPE, stderr=subprocess.PIPE
-                        )
+       # subprocess.Popen(
+       #                   [
+       #                       "aplay",
+       #                       "/home/pi/nicks-gassistant/sample-audio-files/Fb.wav"
+       #                   ],
+       #                   stdin=subprocess.PIPE,
+       #                   stdout=subprocess.PIPE, stderr=subprocess.PIPE
+       #                 )
+        os.system("aplay ~/nicks-gassistant/sample-audio-files/Fb.wav")
         say('I am listening Nick')
 
     elif event.type == EventType.ON_END_OF_UTTERANCE:
@@ -72,14 +73,15 @@ def process_event(event):
 def main():
     credentials = aiy.assistant.auth_helpers.get_assistant_credentials()
     with Assistant(credentials) as assistant:
-        subprocess.Popen(
-                            [
-                                "aplay", 
-                                "~/nicks-gassistant/sample-audio-files/Startup.wav"
-                            ],
-                            stdin=subprocess.PIPE,
-                            stdout=subprocess.PIPE, stderr=subprocess.PIPE
-                        )
+       # subprocess.Popen(
+       #                     [
+       #                         "aplay", 
+       #                         "~/nicks-gassistant/sample-audio-files/Startup.wav"
+       #                     ],
+       #                     stdin=subprocess.PIPE,
+       #                     stdout=subprocess.PIPE, stderr=subprocess.PIPE
+       #                 )
+        os.system("aplay ~/nicks-gassistant/sample-audio-files/Startup.wav")
         for event in assistant.start():
             process_event(event)
             usercmd=event.args

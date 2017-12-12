@@ -26,7 +26,7 @@ then
 fi
 
 sudo apt-get -y install alsa-utils python3-all-dev python3-pip python3-numpy \
-  python3-rpi.gpio python3-pysocks virtualenv rsync libttspico-utils ntpdate
+  python3-rpi.gpio python3-pysocks virtualenv rsync libttspico-utils ntpdate mpg123
 sudo pip3 install --upgrade pip virtualenv
 
 cd "${scripts_dir}/.."
