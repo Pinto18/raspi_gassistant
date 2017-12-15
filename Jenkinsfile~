@@ -4,16 +4,16 @@ pipeline
 {
    agent any
 
+   def installed = fileExists 'env/bin/activate'
    stages
    {
-      def installed = fileExists 'env/bin/activate'
       if(!installed)
       {
          stage('Install Python Virual Environment')
-	 {
-	    sh 'virtual env --no-site-packages .'
-	 }
-      }
+         {
+            sh 'virtual env --no-site-packages .'
+         }
+      } 
       stage('Build')
       {
          steps
