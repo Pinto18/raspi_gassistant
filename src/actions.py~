@@ -59,14 +59,14 @@ def action(phrase):
         #      "-h",
         #      "now"]
         # )
-        response = requests.get('http:localhost:5000/shutdown')
+        response = requests.get('https://localhost:5000/shutdown')
         command = response.json()
         os.system(command['command'])
     if 'boot' in phrase:
         #aiy.audio.say('Restarting now.')
         say('Restarting now.')
         time.sleep(10)
-        response = requests.get('http:localhost:5000/reboot')
+        response = requests.get('https://localhost:5000/reboot')
         command = response.json()
         os.system(command['command'])
 
