@@ -20,7 +20,7 @@ pipeline
 	    echo '========== Testing =========='
 	    sh '''
 	        source env/bin/activate
-	        python 'src/tests/**.py'
+	        python 'tests/**.py'
 		deactivate
 	        '''
             junit 'src/tests/test-report/**.xml'

@@ -15,21 +15,14 @@ pipeline
       }
       stage('Test')
       {
-         try
+         steps
 	 {
-            echo '========== Testing =========='
+	    echo '========== Testing =========='
 	    sh '''
 	        source env/bin/activate
 	        python 'src/tests/**.py'
 		deactivate
 	        '''
-	 }
-	 catch(err)
-         {
-	    currentBuild.Result = 'FAILURE'
-	 }
-	 finally
-	 {
             junit 'src/tests/test-report/**.xml'
 	 }
       }
