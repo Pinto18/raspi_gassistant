@@ -6,6 +6,14 @@ pipeline
 
    stages
    {
+      def installed = fileExists 'env/bin/activate'
+      if(!installed)
+      {
+         stage('Install Python Virual Environment')
+	 {
+	    sh 'virtual env --no-site-packages .'
+	 }
+      }
       stage('Build')
       {
          steps
@@ -15,11 +23,31 @@ pipeline
       }
       stage('Test')
       {
+          def testError = null
          steps
 	 {
-	    echo '========== Testing =========='
-	    python 'src/tests/**.py'
-	    junit 'src/tests/test-reports/**.xml'
+	    try
+	    {
+	       echo '========== Testing =========='
+	       sh '''
+	          source env/bin/activate
+	          python 'src/tests/**.py'
+		  deactivate
+	          '''
+	    }
+	    catch(err)
+	    {
+	       testError = err
+	       currentBuild.Result = 'FAILURE'
+	    }
+	    finally
+	    {
+	       junit 'src/tests/test-report/**.xml'
+	       if(testError)
+	       {
+	          throw testError
+	       }
+	    }
 	 }
       }
       stage('Deploy')

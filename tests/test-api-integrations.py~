@@ -20,4 +20,5 @@ class ClientTestCases(unittest.TestCase):
         self.assertEqual(response.json(), {'command' : 'sudo reboot'})
 
 if __name__ == '__main__':
-    unittest.main()
+    import xmlrunner
+    unittest.main(testRunner=xmlrunner.XMLTESTRUNNER(output='test-reports'))

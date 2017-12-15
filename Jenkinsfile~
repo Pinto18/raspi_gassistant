@@ -1,3 +1,5 @@
+#!usr/bin/envy/groovy
+
 pipeline
 {
    agent any
