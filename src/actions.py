@@ -8,9 +8,9 @@ import aiy.audio
 from gtts import gTTS
 
 def say(words):
-    tts.save('temp.mp3')
-    os.system('mpg123 temp.mp3')
-    os.remove('temp.mp3')
+    tts.save('temp.wav')
+    os.system('mpg123 temp.wav -q')
+    os.remove('temp.wav')
 
 def action(phrase):
     if 'shut down' in phrase:
