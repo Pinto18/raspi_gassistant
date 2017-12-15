@@ -1,9 +1,0 @@
-FROM alpine:3.4 
-WORKDIR /code
-COPY . /code
-RUN apk add --update \
-   	python-pip \
-	python-dev \
-	build-essential \	
-    && pip install -r requirements.txt
-CMD ["python", "raspi_os_commands.py"]
