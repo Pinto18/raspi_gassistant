@@ -18,10 +18,9 @@ pipeline
          steps
 	 {
 	    echo '========== Testing =========='
+	    echo "${pwd()}"
 	    bat '''
-	         source env/bin/activate
 	         python 'tests/*.py'
-		 deactivate
 	        '''
             junit 'test-report/*.xml'
 	 }

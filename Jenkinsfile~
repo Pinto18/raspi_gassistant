@@ -18,10 +18,10 @@ pipeline
          steps
 	 {
 	    echo '========== Testing =========='
-	    sh '''
-	        source env/bin/activate
-	        python 'tests/*.py'
-		deactivate
+	    bat '''
+	         source env/bin/activate
+	         python 'tests/*.py'
+		 deactivate
 	        '''
             junit 'test-report/*.xml'
 	 }
