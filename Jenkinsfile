@@ -18,7 +18,7 @@ pipeline
          steps
 	 {
 	    echo '========== Testing =========='
-	    bat 'python tests/**.py'
+	    bat 'python tests/test-api-integrations.py'
             junit 'test-report/**.xml'
 	 }
       }
