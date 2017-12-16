@@ -18,11 +18,10 @@ pipeline
          steps
 	 {
 	    echo '========== Testing =========='
-	    echo "${pwd()}"
 	    bat '''
-	         python 'tests/*.py'
+	         python 'tests/**.py'
 	        '''
-            junit 'test-report/*.xml'
+            junit 'test-report/**.xml'
 	 }
       }
       stage('Deploy')
