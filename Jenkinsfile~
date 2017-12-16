@@ -23,7 +23,7 @@ pipeline
 	        python 'tests/**.py'
 		deactivate
 	        '''
-            junit 'src/tests/test-report/**.xml'
+            junit 'test-report/**.xml'
 	 }
       }
       stage('Deploy')
